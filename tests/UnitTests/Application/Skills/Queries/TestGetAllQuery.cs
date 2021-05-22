@@ -12,12 +12,12 @@ using Xunit;
 
 namespace UnitTests.Application.Skills.Queries
 {
-    public class TestGetAll
+    public class TestGetAllQuery
     {
         private readonly IMapper _mapper;
         private readonly Mock<ISkillRepository> _repository;
 
-        public TestGetAll()
+        public TestGetAllQuery()
         {
             var config = new MapperConfiguration(cfg =>
             {
