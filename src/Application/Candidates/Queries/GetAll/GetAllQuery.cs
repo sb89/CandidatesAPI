@@ -25,7 +25,7 @@ namespace Application.Candidates.Queries.GetAll
         
         public async Task<GetAllVm> Handle(GetAllQuery request, CancellationToken cancellationToken)
         {
-            var candidates = await _candidateRepository.GetAll();
+            var candidates = await _candidateRepository.GetAllAsync();
 
             return new GetAllVm
             {

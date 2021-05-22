@@ -13,7 +13,7 @@ namespace Infrastructure.Repositories
         {
         }
 
-        public async Task<IEnumerable<Candidate>> GetAll()
+        public async Task<IEnumerable<Candidate>> GetAllAsync()
         {
             using var conn = ConnectionFactory.GetConnection();
 

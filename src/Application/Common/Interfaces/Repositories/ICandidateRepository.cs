@@ -6,6 +6,6 @@ namespace Application.Common.Interfaces.Repositories
 {
     public interface ICandidateRepository
     {
-        Task<IEnumerable<Candidate>> GetAll();
+        Task<IEnumerable<Candidate>> GetAllAsync();
     }
 }

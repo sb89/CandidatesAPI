@@ -36,7 +36,7 @@ namespace UnitTests.Application.Candidates.Queries
                 new(), new(), new()
             };
 
-            _repository.Setup(x => x.GetAll()).ReturnsAsync(candidates);
+            _repository.Setup(x => x.GetAllAsync()).ReturnsAsync(candidates);
             
             var query = new GetAllQueryHandler(_repository.Object, _mapper);
 
