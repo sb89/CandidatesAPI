@@ -1,6 +1,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Candidates.Commands.Update;
+using Application.Common.Exceptions;
 using Application.Common.Interfaces.Repositories;
 using Application.Common.Mappings;
 using AutoMapper;
@@ -34,6 +35,19 @@ namespace UnitTests.Application.Candidates.Commands
             await handler.Handle(new UpdateCommand(), CancellationToken.None);
             
             _repository.Verify(x => x.UpdateAsync(It.IsAny<Candidate>()));
+        }
+        
+        [Fact]
+        public async Task ShouldFailIfUpdateDoesNotUpdateExpectedNumberOfRows()
+        {
+            _repository.Setup(x => x.UpdateAsync(It.IsAny<Candidate>())).ReturnsAsync(1);
+            
+            var handler = new UpdateCommandHandler(_mapper, _repository.Object);
+
+            var ex = await Assert.ThrowsAsync<BadRequestException>(async () =>
+                await handler.Handle(new UpdateCommand(), CancellationToken.None));
+            
+            Assert.Equal("Did not update the expected number of rows", ex.Message);
         }
     }
 }

@@ -1,5 +1,6 @@
 using System.Threading;
 using System.Threading.Tasks;
+using Application.Common.Exceptions;
 using Application.Common.Interfaces.Repositories;
 using AutoMapper;
 using Domain.Entities;
@@ -47,7 +48,11 @@ namespace Application.Candidates.Commands.Update
         {
             var candidate = _mapper.Map<Candidate>(request);
 
-            await _repository.UpdateAsync(candidate);
+            var rowsModified = await _repository.UpdateAsync(candidate);
+            if (rowsModified != 1)
+            {
+                throw new BadRequestException("Did not update the expected number of rows");
+            }
 
             return Unit.Value;
         }

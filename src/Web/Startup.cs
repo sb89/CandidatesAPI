@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using MediatR;
+using Web.Filters;
 
 namespace Web
 {
@@ -34,7 +35,8 @@ namespace Web
             services.AddAutoMapper(assembly);
             services.AddValidatorsFromAssembly(assembly);
             
-            services.AddControllers().AddFluentValidation();
+            services.AddControllers(o => o.Filters.Add<ApiExceptionFilterAttribute>())
+                .AddFluentValidation();
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "Web", Version = "v1"}); });
         }
 
