@@ -19,6 +19,8 @@ namespace Application.Common.Mappings
             CreateMap<UpdateCandidateCommand, Candidate>();
 
             CreateMap<Skill, SkillDto>();
+
+            CreateMap<Skill, CandidateSkills.Queries.SkillDto>();
         }
     }
 }

@@ -1,5 +1,8 @@
 using System;
 using System.Threading.Tasks;
+using Application.CandidateSkills.Queries;
+using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Web.Controllers
@@ -8,11 +11,23 @@ namespace Web.Controllers
     [Route("candidates/{candidateId:int}/skills")]
     public class CandidateSkillsController : ControllerBase
     {
-        [HttpGet]
-        public async Task<ActionResult> GetAll(int candidateId)
+        private readonly IMediator _mediator;
+
+        public CandidateSkillsController(IMediator mediator)
         {
-            Console.WriteLine(candidateId);
-            return Ok();
+            _mediator = mediator;
+        }
+        
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<GetSkillsForCandidateVm>> GetAll(int candidateId)
+        {
+            var command = new GetSkillsForCandidateQuery
+            {
+                CandidateId = candidateId
+            };
+            
+            return await _mediator.Send(command);
         }
         
         [HttpPost("{skillId}")]

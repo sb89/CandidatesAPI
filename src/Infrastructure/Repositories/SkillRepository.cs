@@ -22,7 +22,7 @@ namespace Infrastructure.Repositories
             return await conn.QueryAsync<Skill>(sql);
         }
 
-        public async Task<IEnumerable<Skill>> GetSkillsForCandidate(int candidateId)
+        public async Task<IEnumerable<Skill>> GetSkillsForCandidateAsync(int candidateId)
         {
             using var conn = ConnectionFactory.GetConnection();
 

@@ -8,6 +8,6 @@ namespace Application.Common.Interfaces.Repositories
     {
         Task<IEnumerable<Skill>> GetAllAsync();
 
-        Task<IEnumerable<Skill>> GetSkillsForCandidate(int userId);
+        Task<IEnumerable<Skill>> GetSkillsForCandidateAsync(int userId);
     }
 }
