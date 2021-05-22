@@ -40,7 +40,7 @@ namespace UnitTests.Application.Candidates.Commands
         [Fact]
         public async Task ShouldFailIfUpdateDoesNotUpdateExpectedNumberOfRows()
         {
-            _repository.Setup(x => x.UpdateAsync(It.IsAny<Candidate>())).ReturnsAsync(1);
+            _repository.Setup(x => x.UpdateAsync(It.IsAny<Candidate>())).ReturnsAsync(0);
             
             var handler = new UpdateCommandHandler(_mapper, _repository.Object);
 
