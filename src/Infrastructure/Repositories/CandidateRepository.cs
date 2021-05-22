@@ -37,5 +37,19 @@ namespace Infrastructure.Repositories
 
             return await conn.ExecuteScalarAsync<int>(sql, candidate);
         }
+
+        public async Task<int> UpdateAsync(Candidate candidate)
+        {
+            using var conn = ConnectionFactory.GetConnection();
+            
+            candidate.UpdatedDate = DateTimeOffset.Now;
+            
+            const string sql = @"UPDATE Candidate SET FirstName = @FirstName, Surname = @Surname, DateOfBirth = @DateOfBirth,
+                                    Address1 = @Address1, Town = @Town, Country = @Country, PostCode = @PostCode, PhoneHome = @PhoneHome,
+                                    PhoneMobile = @PhoneMobile, PhoneWork = @PhoneWork, UpdatedDate = @UpdatedDate
+                                WHERE ID = @Id;";
+
+            return await conn.ExecuteAsync(sql, candidate);
+        }
     }
 }

@@ -9,5 +9,7 @@ namespace Application.Common.Interfaces.Repositories
         Task<IEnumerable<Candidate>> GetAllAsync();
 
         Task<int> CreateAsync(Candidate candidate);
+
+        Task<int> UpdateAsync(Candidate candidate);
     }
 }

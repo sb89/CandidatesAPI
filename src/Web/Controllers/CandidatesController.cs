@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using Application.Candidates.Commands.Create;
+using Application.Candidates.Commands.Update;
 using Application.Candidates.Queries.GetAll;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -30,6 +31,20 @@ namespace Web.Controllers
         public async Task<ActionResult<int>> Create(CreateCommand command)
         {
             return await _mediator.Send(command);
+        }
+        
+        [HttpPost("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult> Create(int id, UpdateCommand command)
+        {
+            if (id != command.Id)
+            {
+                return BadRequest();
+            }
+            
+            await _mediator.Send(command);
+
+            return NoContent();
         }
     }
 }
