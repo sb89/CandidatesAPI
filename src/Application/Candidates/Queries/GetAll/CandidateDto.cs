@@ -1,8 +1,8 @@
 using System;
 
-namespace Domain.Entities
+namespace Application.Candidates.Queries.GetAll
 {
-    public class Candidate
+    public class CandidateDto
     {
         public string FirstName { get; set; }
 

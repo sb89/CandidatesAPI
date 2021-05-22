@@ -1,4 +1,7 @@
 using System.Threading.Tasks;
+using Application.Candidates.Queries.GetAll;
+using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Web.Controllers
@@ -7,11 +10,18 @@ namespace Web.Controllers
     [Route("[controller]")]
     public class CandidatesController : ControllerBase
     {
+        private readonly IMediator _mediator;
+
+        public CandidatesController(IMediator mediator)
+        {
+            _mediator = mediator;
+        }
 
         [HttpGet]
-        public async Task<IActionResult> All()
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<GetAllVm>> All()
         {
-            return Ok();
+            return await _mediator.Send(new GetAllQuery());
         }
     }
 }
