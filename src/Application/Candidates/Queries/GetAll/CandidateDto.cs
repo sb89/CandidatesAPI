@@ -6,7 +6,7 @@ namespace Application.Candidates.Queries.GetAll
     {
         public string FirstName { get; set; }
 
-        public DateTime DateOfBirth { get; set; }
+        public DateTimeOffset DateOfBirth { get; set; }
 
         public string Surname { get; set; }
 

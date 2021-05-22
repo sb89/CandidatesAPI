@@ -2,10 +2,8 @@ using System;
 
 namespace Domain.Entities
 {
-    public class Candidate
+    public class Candidate : BaseEntity
     {
-        public int Id { get; set; }
-        
         public string FirstName { get; set; }
 
         public DateTimeOffset DateOfBirth { get; set; }
@@ -25,9 +23,5 @@ namespace Domain.Entities
         public string PhoneMobile { get; set; }
 
         public string PhoneWork { get; set; }
-
-        public DateTimeOffset CreatedDate { get; set; }
-        
-        public DateTimeOffset UpdatedDate { get; set; }
     }
 }
