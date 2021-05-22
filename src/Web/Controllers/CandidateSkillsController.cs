@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using Application.CandidateSkills.Commands.Create;
 using Application.CandidateSkills.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -30,10 +31,15 @@ namespace Web.Controllers
             return await _mediator.Send(command);
         }
         
-        [HttpPost("{skillId}")]
-        public async Task<ActionResult> Add(int candidateId, int skillId)
+        [HttpPost]
+        public async Task<ActionResult<int>> Add(int candidateId, AddSkillToCandidateCommand command)
         {
-            throw new NotImplementedException();
+            if (command.CandidateId != candidateId)
+            {
+                return BadRequest();
+            }
+            
+            return await _mediator.Send(command);
         }
         
         [HttpDelete("{skillId}")]

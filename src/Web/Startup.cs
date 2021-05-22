@@ -30,6 +30,7 @@ namespace Web
             services.AddTransient<IDbConnectionFactory, DbConnectionFactory>();
             services.AddScoped<ICandidateRepository, CandidateRepository>();
             services.AddScoped<ISkillRepository, SkillRepository>();
+            services.AddScoped<ICandidateSkillRepository, CandidateSkillRepository>();
             
             var assembly = AppDomain.CurrentDomain.Load("Application");
             services.AddMediatR(assembly);
