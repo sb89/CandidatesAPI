@@ -30,25 +30,26 @@ namespace Application.Candidates.Commands.Update
         public string PhoneMobile { get; set; }
 
         public string PhoneWork { get; set; }
+        
+    }
+    
+    public class UpdateCommandHandler : IRequestHandler<UpdateCommand>
+    {
+        private readonly IMapper _mapper;
+        private readonly ICandidateRepository _repository;
 
-        public class UpdateCommandHandler : IRequestHandler<UpdateCommand>
+        public UpdateCommandHandler(IMapper mapper, ICandidateRepository repository)
         {
-            private readonly IMapper _mapper;
-            private readonly ICandidateRepository _repository;
+            _mapper = mapper;
+            _repository = repository;
+        }
+        public async Task<Unit> Handle(UpdateCommand request, CancellationToken cancellationToken)
+        {
+            var candidate = _mapper.Map<Candidate>(request);
 
-            public UpdateCommandHandler(IMapper mapper, ICandidateRepository repository)
-            {
-                _mapper = mapper;
-                _repository = repository;
-            }
-            public async Task<Unit> Handle(UpdateCommand request, CancellationToken cancellationToken)
-            {
-                var candidate = _mapper.Map<Candidate>(request);
+            await _repository.UpdateAsync(candidate);
 
-                await _repository.UpdateAsync(candidate);
-
-                return Unit.Value;
-            }
+            return Unit.Value;
         }
     }
 }
