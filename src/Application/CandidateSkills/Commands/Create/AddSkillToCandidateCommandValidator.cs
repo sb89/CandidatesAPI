@@ -6,8 +6,8 @@ namespace Application.CandidateSkills.Commands.Create
     {
         public AddSkillToCandidateCommandValidator()
         {
-            RuleFor(x => x.CandidateId).NotNull();
-            RuleFor(x => x.SkillId).NotNull();
+            RuleFor(x => x.CandidateId).NotEmpty();
+            RuleFor(x => x.SkillId).NotEmpty();
         }
     }
 }

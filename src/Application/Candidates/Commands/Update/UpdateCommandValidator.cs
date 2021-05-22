@@ -6,7 +6,7 @@ namespace Application.Candidates.Commands.Update
     {
         public UpdateCommandValidator()
         {
-            RuleFor(x => x.Id).NotNull();
+            RuleFor(x => x.Id).NotEmpty();
             RuleFor(x => x.FirstName).MaximumLength(50).NotEmpty();
             RuleFor(x => x.Surname).MaximumLength(50).NotEmpty();
             RuleFor(x => x.DateOfBirth).NotEmpty();
