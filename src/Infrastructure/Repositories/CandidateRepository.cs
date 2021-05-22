@@ -14,6 +14,15 @@ namespace Infrastructure.Repositories
         {
         }
 
+        public async Task<Candidate> GetAsync(int id)
+        {
+            using var conn = ConnectionFactory.GetConnection();
+
+            const string sql = "SELECT * FROM Candidate WHERE ID = @Id;";
+
+            return await conn.QueryFirstOrDefaultAsync<Candidate>(sql, new { Id = id });
+        }
+
         public async Task<IEnumerable<Candidate>> GetAllAsync()
         {
             using var conn = ConnectionFactory.GetConnection();

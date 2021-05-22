@@ -12,7 +12,16 @@ namespace Infrastructure.Repositories
         public SkillRepository(IDbConnectionFactory connectionFactory) : base(connectionFactory)
         {
         }
-        
+
+        public async Task<Skill> GetAsync(int id)
+        {
+            using var conn = ConnectionFactory.GetConnection();
+
+            const string sql = "SELECT * FROM Skill WHERE ID = @Id;";
+
+            return await conn.QueryFirstOrDefaultAsync<Skill>(sql, new { Id = id });
+        }
+
         public async Task<IEnumerable<Skill>> GetAllAsync()
         {
             using var conn = ConnectionFactory.GetConnection();

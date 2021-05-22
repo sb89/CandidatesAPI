@@ -6,6 +6,8 @@ namespace Application.Common.Interfaces.Repositories
 {
     public interface ICandidateRepository
     {
+        Task<Candidate> GetAsync(int id);
+        
         Task<IEnumerable<Candidate>> GetAllAsync();
 
         Task<int> CreateAsync(Candidate candidate);
