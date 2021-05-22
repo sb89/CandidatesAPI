@@ -6,7 +6,7 @@ namespace Domain.Entities
     {
         public string FirstName { get; set; }
 
-        public DateTime DateOfBirth { get; set; }
+        public DateTimeOffset DateOfBirth { get; set; }
 
         public string Surname { get; set; }
 
@@ -23,5 +23,9 @@ namespace Domain.Entities
         public string PhoneMobile { get; set; }
 
         public string PhoneWork { get; set; }
+
+        public DateTimeOffset CreatedDate { get; set; }
+        
+        public DateTimeOffset UpdatedDate { get; set; }
     }
 }
