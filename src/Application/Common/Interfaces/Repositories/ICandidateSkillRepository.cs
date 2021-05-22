@@ -8,5 +8,7 @@ namespace Application.Common.Interfaces.Repositories
         Task<CandidateSkill> GetAsync(int candidateId, int skillId);
         
         Task<int> AddAsync(CandidateSkill candidateSkill);
+
+        Task DeleteAsync(int candidateId, int skillId);
     }
 }

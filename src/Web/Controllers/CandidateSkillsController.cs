@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using Application.CandidateSkills.Commands.Create;
+using Application.CandidateSkills.Commands.Delete;
 using Application.CandidateSkills.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -45,7 +46,15 @@ namespace Web.Controllers
         [HttpDelete("{skillId}")]
         public async Task<ActionResult> Remove(int candidateId, int skillId)
         {
-            throw new NotImplementedException();
+            var command = new RemoveSkillFromCandidateCommand
+            {
+                CandidateId = candidateId,
+                SkillId = skillId
+            };
+            
+            await _mediator.Send(command);
+
+            return NoContent();
         }
     }
 }

@@ -35,5 +35,14 @@ namespace Infrastructure.Repositories
 
             return await conn.ExecuteScalarAsync<int>(sql, candidateSkill);
         }
+
+        public async Task DeleteAsync(int candidateId, int skillId)
+        {
+            using var conn = ConnectionFactory.GetConnection();
+
+            const string sql = "DELETE FROM CandidateSkill WHERE CandidateID = @CandidateId AND SkillID = @SkillId";
+
+            await conn.ExecuteAsync(sql, new {CandidateId = candidateId, SkillId = skillId});
+        }
     }
 }
