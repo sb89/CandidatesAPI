@@ -1,5 +1,7 @@
 using System;
 using Application.Common.Interfaces.Repositories;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Infrastructure.Connection;
 using Infrastructure.Repositories;
 using Microsoft.AspNetCore.Builder;
@@ -30,8 +32,9 @@ namespace Web
             var assembly = AppDomain.CurrentDomain.Load("Application");
             services.AddMediatR(assembly);
             services.AddAutoMapper(assembly);
+            services.AddValidatorsFromAssembly(assembly);
             
-            services.AddControllers();
+            services.AddControllers().AddFluentValidation();
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "Web", Version = "v1"}); });
         }
 
