@@ -1,5 +1,7 @@
+using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Application.Common.Exceptions;
 using Application.Common.Interfaces.Repositories;
 using AutoMapper;
 using Domain.Entities;
@@ -27,6 +29,13 @@ namespace Application.CandidateSkills.Commands.Create
         
         public async Task<int> Handle(AddSkillToCandidateCommand request, CancellationToken cancellationToken)
         {
+
+            var existing = await _repository.GetAsync(request.CandidateId, request.SkillId);
+            if (existing != null)
+            {
+                throw new BadRequestException("Skill already assigned to Candidate.");
+            }
+
             var candidateSkill = _mapper.Map<CandidateSkill>(request);
 
             return await _repository.AddAsync(candidateSkill);

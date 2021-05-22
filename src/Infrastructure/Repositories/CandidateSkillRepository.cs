@@ -13,6 +13,16 @@ namespace Infrastructure.Repositories
         {
         }
 
+        public async Task<CandidateSkill> GetAsync(int candidateId, int skillId)
+        {
+            using var conn = ConnectionFactory.GetConnection();
+            
+            const string sql = @"SELECT * FROM CandidateSkill WHERE CandidateID = @CandidateId AND SkillID = @SkillId";
+
+            return await conn.QueryFirstOrDefaultAsync<CandidateSkill>(sql,
+                new {CandidateId = candidateId, SkillId = skillId});
+        }
+
         public async Task<int> AddAsync(CandidateSkill candidateSkill)
         {
             using var conn = ConnectionFactory.GetConnection();
