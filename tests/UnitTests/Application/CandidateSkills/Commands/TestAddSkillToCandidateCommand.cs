@@ -56,7 +56,6 @@ namespace UnitTests.Application.CandidateSkills.Commands
         public async Task ShouldFailIfCandidateDoesntExist()
         {
             _skillRepository.Setup(x => x.GetAsync(SkillId)).ReturnsAsync(new Skill());
-            
             _candidateRepository.Setup(x => x.GetAsync(CandidateId)).ReturnsAsync((Candidate)null);
             
             var handler = new AddSkillToCandidateCommandHandler(_candidateSkillRepository.Object, _skillRepository.Object, 
@@ -77,7 +76,6 @@ namespace UnitTests.Application.CandidateSkills.Commands
         public async Task ShouldCreateNewCandidateSKill()
         {
             _skillRepository.Setup(x => x.GetAsync(SkillId)).ReturnsAsync(new Skill());
-            
             _candidateRepository.Setup(x => x.GetAsync(CandidateId)).ReturnsAsync(new Candidate());
             
             var handler = new AddSkillToCandidateCommandHandler(_candidateSkillRepository.Object, _skillRepository.Object, 
@@ -91,6 +89,28 @@ namespace UnitTests.Application.CandidateSkills.Commands
             await handler.Handle(command, CancellationToken.None);
             
             _candidateSkillRepository.Verify(x => x.AddAsync(It.Is<CandidateSkill>(y => y.CandidateId == CandidateId && y.SkillId == SkillId)));
+        }
+        
+        [Fact]
+        public async Task ShouldReturnNewId()
+        {
+            const int id = 123;
+            _candidateSkillRepository.Setup(x => x.AddAsync(It.IsAny<CandidateSkill>())).ReturnsAsync(id);
+            
+            _skillRepository.Setup(x => x.GetAsync(SkillId)).ReturnsAsync(new Skill());
+            _candidateRepository.Setup(x => x.GetAsync(CandidateId)).ReturnsAsync(new Candidate());
+            
+            var handler = new AddSkillToCandidateCommandHandler(_candidateSkillRepository.Object, _skillRepository.Object, 
+                _candidateRepository.Object, _mapper);
+            var command = new AddSkillToCandidateCommand
+            {
+                CandidateId = CandidateId,
+                SkillId = SkillId
+            };
+            
+            var response = await handler.Handle(command, CancellationToken.None);
+            
+            Assert.Equal(response, id);
         }
     }
 }
