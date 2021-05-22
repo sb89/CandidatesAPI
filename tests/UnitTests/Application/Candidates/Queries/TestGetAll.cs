@@ -38,9 +38,9 @@ namespace UnitTests.Application.Candidates.Queries
 
             _repository.Setup(x => x.GetAllAsync()).ReturnsAsync(candidates);
             
-            var handler = new GetAllQueryHandler(_repository.Object, _mapper);
+            var handler = new GetAllCandidatesQueryHandler(_repository.Object, _mapper);
 
-            var response = await handler.Handle(new GetAllQuery(), CancellationToken.None);
+            var response = await handler.Handle(new GetAllCandidatesQuery(), CancellationToken.None);
             
             Assert.Equal(candidates.Count, response.Candidates.Count());
         }

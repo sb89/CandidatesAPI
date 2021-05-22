@@ -38,9 +38,9 @@ namespace UnitTests.Application.Skills.Queries
 
             _repository.Setup(x => x.GetAllAsync()).ReturnsAsync(skills);
             
-            var handler = new GetAllQueryHandler(_mapper, _repository.Object);
+            var handler = new GetAllSkillsQueryHandler(_mapper, _repository.Object);
 
-            var response = await handler.Handle(new GetAllQuery(), CancellationToken.None);
+            var response = await handler.Handle(new GetAllSkillsQuery(), CancellationToken.None);
             
             Assert.Equal(skills.Count, response.Skills.Count());
         }

@@ -29,9 +29,9 @@ namespace UnitTests.Application.Candidates.Commands
         [Fact]
         public async Task ShouldCreateCandidate()
         {
-            var handler = new CreateCommandHandler(_repository.Object, _mapper);
+            var handler = new CreateCandidateCommandHandler(_repository.Object, _mapper);
 
-            await handler.Handle(new CreateCommand(), CancellationToken.None);
+            await handler.Handle(new CreateCandidateCommand(), CancellationToken.None);
             
             _repository.Verify(x => x.CreateAsync(It.IsAny<Candidate>()));
         }
@@ -42,9 +42,9 @@ namespace UnitTests.Application.Candidates.Commands
             const int id = 123;
             _repository.Setup(x => x.CreateAsync(It.IsAny<Candidate>())).ReturnsAsync(id);
             
-            var handler = new CreateCommandHandler(_repository.Object, _mapper);
+            var handler = new CreateCandidateCommandHandler(_repository.Object, _mapper);
 
-            var response = await handler.Handle(new CreateCommand(), CancellationToken.None);
+            var response = await handler.Handle(new CreateCandidateCommand(), CancellationToken.None);
             
             Assert.Equal(response, id);
         }

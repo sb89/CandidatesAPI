@@ -2,7 +2,7 @@ using FluentValidation;
 
 namespace Application.Candidates.Commands.Update
 {
-    public class UpdateCommandValidator : AbstractValidator<UpdateCommand>
+    public class UpdateCommandValidator : AbstractValidator<UpdateCandidateCommand>
     {
         public UpdateCommandValidator()
         {

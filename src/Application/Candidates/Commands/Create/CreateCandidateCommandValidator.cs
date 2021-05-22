@@ -2,9 +2,9 @@ using FluentValidation;
 
 namespace Application.Candidates.Commands.Create
 {
-    public class CreateCommandValidator : AbstractValidator<CreateCommand>
+    public class CreateCandidateCommandValidator : AbstractValidator<CreateCandidateCommand>
     {
-        public CreateCommandValidator()
+        public CreateCandidateCommandValidator()
         {
             RuleFor(x => x.FirstName).MaximumLength(50).NotEmpty();
             RuleFor(x => x.Surname).MaximumLength(50).NotEmpty();

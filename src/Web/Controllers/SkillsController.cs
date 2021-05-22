@@ -19,9 +19,9 @@ namespace Web.Controllers
         
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<GetAllVm>> All()
+        public async Task<ActionResult<GetAllSkillsVm>> All()
         {
-            return await _mediator.Send(new GetAllQuery());
+            return await _mediator.Send(new GetAllSkillsQuery());
         }
 
     }

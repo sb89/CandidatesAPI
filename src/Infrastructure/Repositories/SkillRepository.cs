@@ -21,5 +21,14 @@ namespace Infrastructure.Repositories
 
             return await conn.QueryAsync<Skill>(sql);
         }
+
+        public async Task<IEnumerable<Skill>> GetSkillsForCandidate(int candidateId)
+        {
+            using var conn = ConnectionFactory.GetConnection();
+
+            const string sql = "SELECT s.* FROM Skill s INNER JOIN CandidateSkill cs ON s.Id = cs.SkillId WHERE cs.CandidateId = @CandidateId;";
+
+            return await conn.QueryAsync<Skill>(sql, new { CandidateId = candidateId});
+        }
     }
 }

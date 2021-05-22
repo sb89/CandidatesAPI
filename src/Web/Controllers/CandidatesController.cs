@@ -21,28 +21,28 @@ namespace Web.Controllers
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<GetAllVm>> All()
+        public async Task<ActionResult<GetAllCandidatesVm>> All()
         {
-            return await _mediator.Send(new GetAllQuery());
+            return await _mediator.Send(new GetAllCandidatesQuery());
         }
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<int>> Create(CreateCommand command)
+        public async Task<ActionResult<int>> Create(CreateCandidateCommand candidateCommand)
         {
-            return await _mediator.Send(command);
+            return await _mediator.Send(candidateCommand);
         }
         
         [HttpPost("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult> Create(int id, UpdateCommand command)
+        public async Task<ActionResult> Create(int id, UpdateCandidateCommand candidateCommand)
         {
-            if (id != command.Id)
+            if (id != candidateCommand.Id)
             {
                 return BadRequest();
             }
             
-            await _mediator.Send(command);
+            await _mediator.Send(candidateCommand);
 
             return NoContent();
         }

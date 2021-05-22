@@ -8,7 +8,7 @@ using MediatR;
 
 namespace Application.Candidates.Commands.Update
 {
-    public class UpdateCommand : IRequest
+    public class UpdateCandidateCommand : IRequest
     {
         public int Id { get; set; }
         
@@ -34,17 +34,17 @@ namespace Application.Candidates.Commands.Update
         
     }
     
-    public class UpdateCommandHandler : IRequestHandler<UpdateCommand>
+    public class UpdateCandidateCommandHandler : IRequestHandler<UpdateCandidateCommand>
     {
         private readonly IMapper _mapper;
         private readonly ICandidateRepository _repository;
 
-        public UpdateCommandHandler(IMapper mapper, ICandidateRepository repository)
+        public UpdateCandidateCommandHandler(IMapper mapper, ICandidateRepository repository)
         {
             _mapper = mapper;
             _repository = repository;
         }
-        public async Task<Unit> Handle(UpdateCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(UpdateCandidateCommand request, CancellationToken cancellationToken)
         {
             var candidate = _mapper.Map<Candidate>(request);
 

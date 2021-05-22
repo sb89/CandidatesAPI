@@ -30,9 +30,11 @@ namespace UnitTests.Application.Candidates.Commands
         [Fact]
         public async Task ShouldUpdateCandidate()
         {
-            var handler = new UpdateCommandHandler(_mapper, _repository.Object);
+            _repository.Setup(x => x.UpdateAsync(It.IsAny<Candidate>())).ReturnsAsync(1);
+            
+            var handler = new UpdateCandidateCommandHandler(_mapper, _repository.Object);
 
-            await handler.Handle(new UpdateCommand(), CancellationToken.None);
+            await handler.Handle(new UpdateCandidateCommand(), CancellationToken.None);
             
             _repository.Verify(x => x.UpdateAsync(It.IsAny<Candidate>()));
         }
@@ -42,10 +44,10 @@ namespace UnitTests.Application.Candidates.Commands
         {
             _repository.Setup(x => x.UpdateAsync(It.IsAny<Candidate>())).ReturnsAsync(0);
             
-            var handler = new UpdateCommandHandler(_mapper, _repository.Object);
+            var handler = new UpdateCandidateCommandHandler(_mapper, _repository.Object);
 
             var ex = await Assert.ThrowsAsync<BadRequestException>(async () =>
-                await handler.Handle(new UpdateCommand(), CancellationToken.None));
+                await handler.Handle(new UpdateCandidateCommand(), CancellationToken.None));
             
             Assert.Equal("Did not update the expected number of rows", ex.Message);
         }

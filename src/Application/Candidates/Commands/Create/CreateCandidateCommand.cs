@@ -7,7 +7,7 @@ using MediatR;
 
 namespace Application.Candidates.Commands.Create
 {
-    public class CreateCommand : IRequest<int>
+    public class CreateCandidateCommand : IRequest<int>
     {
         public string FirstName { get; set; }
 
@@ -30,18 +30,18 @@ namespace Application.Candidates.Commands.Create
         public string PhoneWork { get; set; }
     }
 
-    public class CreateCommandHandler : IRequestHandler<CreateCommand, int>
+    public class CreateCandidateCommandHandler : IRequestHandler<CreateCandidateCommand, int>
     {
         private readonly ICandidateRepository _repository;
         private readonly IMapper _mapper;
 
-        public CreateCommandHandler(ICandidateRepository repository, IMapper mapper)
+        public CreateCandidateCommandHandler(ICandidateRepository repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
         }
         
-        public async Task<int> Handle(CreateCommand request, CancellationToken cancellationToken)
+        public async Task<int> Handle(CreateCandidateCommand request, CancellationToken cancellationToken)
         {
             var candidate = _mapper.Map<Candidate>(request);
 

@@ -15,8 +15,8 @@ namespace Application.Common.Mappings
             CreateMap<int, DateTimeOffset>().ConvertUsing(new IntDateTimeOffsetConverter());
             
             CreateMap<Candidate, CandidateDto>();
-            CreateMap<CreateCommand, Candidate>();
-            CreateMap<UpdateCommand, Candidate>();
+            CreateMap<CreateCandidateCommand, Candidate>();
+            CreateMap<UpdateCandidateCommand, Candidate>();
 
             CreateMap<Skill, SkillDto>();
         }

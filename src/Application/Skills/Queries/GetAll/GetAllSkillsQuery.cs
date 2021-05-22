@@ -7,27 +7,27 @@ using MediatR;
 
 namespace Application.Skills.Queries.GetAll
 {
-    public class GetAllQuery : IRequest<GetAllVm>
+    public class GetAllSkillsQuery : IRequest<GetAllSkillsVm>
     {
         
     }
     
-    public class GetAllQueryHandler : IRequestHandler<GetAllQuery, GetAllVm>
+    public class GetAllSkillsQueryHandler : IRequestHandler<GetAllSkillsQuery, GetAllSkillsVm>
     {
         private readonly IMapper _mapper;
         private readonly ISkillRepository _repository;
 
-        public GetAllQueryHandler(IMapper mapper, ISkillRepository repository)
+        public GetAllSkillsQueryHandler(IMapper mapper, ISkillRepository repository)
         {
             _mapper = mapper;
             _repository = repository;
         }
         
-        public async Task<GetAllVm> Handle(GetAllQuery request, CancellationToken cancellationToken)
+        public async Task<GetAllSkillsVm> Handle(GetAllSkillsQuery request, CancellationToken cancellationToken)
         {
             var candidates = await _repository.GetAllAsync();
 
-            return new GetAllVm
+            return new GetAllSkillsVm
             {
                 Skills = _mapper.Map<IEnumerable<SkillDto>>(candidates)
             };
