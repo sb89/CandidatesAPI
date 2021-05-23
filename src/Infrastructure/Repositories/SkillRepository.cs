@@ -26,7 +26,7 @@ namespace Infrastructure.Repositories
         {
             using var conn = ConnectionFactory.GetConnection();
 
-            const string sql = "SELECT * FROM Skill;";
+            const string sql = "SELECT * FROM Skill Order By Name;";
 
             return await conn.QueryAsync<Skill>(sql);
         }
