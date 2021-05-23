@@ -11,7 +11,7 @@ namespace Application.Candidates.Commands.Create
     {
         public string FirstName { get; set; }
 
-        public int DateOfBirth { get; set; }
+        public long DateOfBirth { get; set; }
 
         public string Surname { get; set; }
 
