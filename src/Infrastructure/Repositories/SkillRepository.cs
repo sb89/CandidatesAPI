@@ -35,7 +35,8 @@ namespace Infrastructure.Repositories
         {
             using var conn = ConnectionFactory.GetConnection();
 
-            const string sql = "SELECT s.* FROM Skill s INNER JOIN CandidateSkill cs ON s.Id = cs.SkillId WHERE cs.CandidateId = @CandidateId;";
+            const string sql = @"SELECT s.* FROM Skill s INNER JOIN CandidateSkill cs ON s.Id = cs.SkillId 
+                                 WHERE cs.CandidateId = @CandidateId ORDER BY s.Name;";
 
             return await conn.QueryAsync<Skill>(sql, new { CandidateId = candidateId});
         }
