@@ -15,6 +15,7 @@ namespace Application.Common.Mappings
         public MappingProfile()
         {
             CreateMap<int, DateTimeOffset>().ConvertUsing(new IntDateTimeOffsetConverter());
+            CreateMap<DateTimeOffset, long>().ConvertUsing(new DateTimeOffsetLongConverter());
             
             CreateMap<Candidate, CandidateDto>();
             CreateMap<CreateCandidateCommand, Candidate>();

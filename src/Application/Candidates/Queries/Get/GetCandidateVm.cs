@@ -1,5 +1,3 @@
-using System;
-
 namespace Application.Candidates.Queries.Get
 {
     public class GetCandidateVm
@@ -8,7 +6,7 @@ namespace Application.Candidates.Queries.Get
         
         public string FirstName { get; set; }
 
-        public DateTimeOffset DateOfBirth { get; set; }
+        public long DateOfBirth { get; set; }
 
         public string Surname { get; set; }
 
