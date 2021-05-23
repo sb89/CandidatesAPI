@@ -4,6 +4,8 @@ namespace Application.Candidates.Queries.GetAll
 {
     public class CandidateDto
     {
+        public int Id { get; set; }
+        
         public string FirstName { get; set; }
 
         public DateTimeOffset DateOfBirth { get; set; }

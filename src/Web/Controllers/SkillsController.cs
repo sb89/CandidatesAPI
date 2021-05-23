@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Web.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class SkillsController : ControllerBase
     {
         private readonly IMediator _mediator;

@@ -17,16 +17,34 @@ namespace Web
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
+            _env = env;
             Configuration = configuration;
         }
-
+        
+        private readonly IWebHostEnvironment _env;
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            Console.WriteLine(_env.EnvironmentName);
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(builder =>
+                {
+                    if (_env.EnvironmentName == "Development")
+                    {
+                        builder.AllowAnyOrigin()
+                            .AllowAnyHeader()
+                            .AllowAnyMethod();
+                    }
+                    // TODO: Do we have to restrict this for production? YES!!!!!!
+                    
+                });
+            });
+            
             services.AddTransient<IDbConnectionFactory, DbConnectionFactory>();
             services.AddScoped<ICandidateRepository, CandidateRepository>();
             services.AddScoped<ISkillRepository, SkillRepository>();
@@ -55,6 +73,8 @@ namespace Web
             //app.UseHttpsRedirection();
 
             app.UseRouting();
+            
+            app.UseCors();
 
             app.UseAuthorization();
 

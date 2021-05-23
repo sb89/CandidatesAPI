@@ -1,4 +1,3 @@
-using System;
 using System.Threading.Tasks;
 using Application.CandidateSkills.Commands.Create;
 using Application.CandidateSkills.Commands.Delete;
@@ -10,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Web.Controllers
 {
     [ApiController]
-    [Route("candidates/{candidateId:int}/skills")]
+    [Route("api/candidates/{candidateId:int}/skills")]
     public class CandidateSkillsController : ControllerBase
     {
         private readonly IMediator _mediator;
