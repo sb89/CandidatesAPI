@@ -6,6 +6,9 @@ The application bas been split up into multiple projects.
 ### Web
 This project is the ASP NET Core Web API.
 
+### Domain
+This project contains the domain entities.
+
 ### Application
 This project contains the business logic.
 
